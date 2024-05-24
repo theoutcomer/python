@@ -1,0 +1,54 @@
+使用type()
+首先，我们来判断对象类型，使用type()函数：
+
+基本类型都可以用type()判断：
+
+使用isinstance()
+对于class的继承关系来说，使用type()就很不方便。我们要判断class的类型，可以使用isinstance()函数。
+
+
+使用__slots__
+但是，如果我们想要限制实例的属性怎么办？比如，只允许对Student实例添加name和age属性。
+
+为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：
+
+使用@property
+
+@属性名.setter
+class Student(object):
+
+    @property
+    def birth(self):
+        return self._birth
+
+    @birth.setter
+    def birth(self, value):
+        self._birth = value
+
+    @property
+    def age(self):
+        return 2015 - self._birth
+
+对于需要Flyable功能的动物，就多继承一个Flyable，例如Bat：
+
+class Bat(Mammal, Flyable):
+    pass
+通过多重继承，一个子类就可以同时获得多个父类的所有功能。   
+MixIn
+在设计类的继承关系时，通常，主线都是单一继承下来的，例如，Ostrich继承自Bird。但是，如果需要“混入”额外的功能，通过多重继承就可以实现，比如，让Ostrich除了继承自Bird外，再同时继承Runnable。这种设计通常称之为MixIn。   
+
+type()
+要创建一个class对象，type()函数依次传入3个参数：
+1\class的名称；
+2\继承的父类集合，注意Python支持多重继承，如果只有一个父类，别忘了tuple的单元素写法；
+3\class的方法名称与函数绑定，这里我们把函数fn绑定到方法名hello上。
+def fn(self, name='world'): # 先定义函数
+...     print('Hello, %s.' % name)
+...
+>>> Hello = type('Hello', (object,), dict(hello=fn)) # 创建Hello class
+
+使用元类
+
+type()
+
+不太好懂，先放着
